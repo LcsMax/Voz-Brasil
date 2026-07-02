@@ -4,11 +4,11 @@ VOZ BRASIL - Gerador Automático de Notícias
 Busca RSS de fontes brasileiras e gera index.html atualizado
 ============================================================
 Fontes:
-  - CNN Brasil    → Notícias Gerais
-  - Exame         → Economia
-  - Lance         → Esportes
-  - Adrenaline    → Tecnologia
-  - Revista Oeste → Política
+  - CNN Brasil         → Notícias Gerais
+  - Exame              → Economia
+  - ge (Globo Esporte) → Esportes
+  - Adrenaline         → Tecnologia
+  - Revista Oeste      → Política
 ============================================================
 """
 
@@ -39,15 +39,15 @@ RSS_SOURCES = {
         "cor": "#f39c12"
     },
     "esportes": {
-        "nome": "Lance",
-        "url": "https://www.lance.com.br/feed/",
+        "nome": "ge",
+        "url": "https://ge.globo.com/rss/ge/",
         "categoria": "Esportes",
         "cat_class": "sports",
         "cor": "#2ecc71"
     },
     "tecnologia": {
         "nome": "Adrenaline",
-        "url": "https://adrenaline.com/feed/",
+        "url": "https://www.adrenaline.com.br/feed/",
         "categoria": "Tecnologia",
         "cat_class": "tech",
         "cor": "#00d4ff"
@@ -61,50 +61,17 @@ RSS_SOURCES = {
     }
 }
 
-# Imagens padrão por categoria — múltiplas opções para variar (caso o RSS não traga imagem)
-FALLBACK_IMAGES = {
-    "geral": [
-        "https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80",  # jornalismo
-        "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600&q=80",  # notícias
-        "https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600&q=80",  # jornal impresso
-        "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80",     # reunião/debate
-        "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&q=80",  # rádio/comunicação
-    ],
-    "economia": [
-        "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80",  # dinheiro
-        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80",     # finanças
-        "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&q=80",  # negócios
-        "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80",  # executivo
-        "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80",  # contrato/trabalho
-    ],
-    "esportes": [
-        "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&q=80",  # atletismo
-        "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&q=80",  # futebol
-        "https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&q=80",     # basquete
-        "https://images.unsplash.com/photo-1538805060514-97d9cc17730c?w=600&q=80",  # corrida
-        "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80",  # fitness/treino
-    ],
-    "tecnologia": [
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80",  # circuito
-        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=600&q=80",  # laptop moderno
-        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80",     # cibersegurança
-        "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",  # robô/IA
-        "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=80",  # análise dados
-    ],
-    "politica": [
-        "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600&q=80",  # votação/democracia
-        "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&q=80",     # congresso
-        "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=600&q=80",     # discurso
-        "https://images.unsplash.com/photo-1568092795958-a3e4aadc5d0c?w=600&q=80",  # bandeira brasil
-        "https://images.unsplash.com/photo-1570126618953-d437176e8c79?w=600&q=80",  # protesto/manifestação
-    ],
-}
+# URL pública do site (usada em canonical, og:url, sitemap, etc.)
+SITE_URL = "https://voz-brasil.pages.dev"
 
-import random
-def get_fallback_image(chave):
-    """Retorna uma imagem padrão aleatória da categoria para variar o visual."""
-    opcoes = FALLBACK_IMAGES.get(chave, FALLBACK_IMAGES["geral"])
-    return random.choice(opcoes)
+# Imagens padrão por categoria (caso o RSS não tenha imagem)
+FALLBACK_IMAGES = {
+    "geral":     "https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80",
+    "economia":  "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80",
+    "esportes":  "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80",
+    "tecnologia":"https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80",
+    "politica":  "https://images.unsplash.com/photo-1523108021757-3b88e9e1cd85?w=600&q=80"
+}
 
 # ============================================================
 # FUNÇÕES AUXILIARES
@@ -118,6 +85,10 @@ def limpar_html(texto):
     texto = html.unescape(texto)
     texto = ' '.join(texto.split())
     return texto.strip()
+
+def esc(texto):
+    """Escapa texto para uso seguro em HTML/atributos (evita quebrar o layout com aspas)."""
+    return html.escape(str(texto), quote=True)
 
 def extrair_imagem(entry):
     """Tenta extrair a imagem de uma entrada RSS por diferentes métodos."""
@@ -200,12 +171,13 @@ def buscar_noticias(chave, config, limite=6):
 
             imagem = extrair_imagem(entry)
             if not imagem:
-                imagem = get_fallback_image(chave)
+                imagem = FALLBACK_IMAGES.get(chave, FALLBACK_IMAGES['geral'])
 
             noticia = {
                 "title":        titulo,
                 "summary":      extrair_resumo(entry),
                 "category":     config['categoria'],
+                "catKey":       chave,
                 "categoryClass": config['cat_class'],
                 "img":          imagem,
                 "link":         getattr(entry, 'link', '#'),
@@ -243,79 +215,81 @@ def gerar_html(todas_noticias):
         if todas_noticias.get(chave):
             destaques.append(todas_noticias[chave][0])
 
-    # Ticker: títulos das primeiras notícias de cada categoria
+    # Ticker: títulos das primeiras notícias de cada categoria (com link real)
     ticker_items = []
     for chave in RSS_SOURCES.keys():
         if todas_noticias.get(chave):
             n = todas_noticias[chave][0]
-            ticker_items.append(f"{n['source'].upper()}: {n['title']}")
+            ticker_items.append((n['link'], f"{n['source'].upper()}: {n['title']}"))
 
     ticker_html = ""
-    for item in ticker_items * 2:
-        ticker_html += f'<span><a href="#">{item}</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span>'
+    for link, item in ticker_items * 2:
+        ticker_html += f'<span><a href="{esc(link)}" target="_blank" rel="noopener">{esc(item)}</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span>'
 
     # ---- Gerador de cards de notícia ----
     def card_html(n, extra_class=""):
         return f"""
-                <article class="news-card {extra_class}" onclick="window.open('{n['link']}','_blank')" style="cursor:pointer;">
+                <article class="news-card {extra_class}">
+                    <a href="{esc(n['link'])}" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="{n['img']}" alt="{n['title']}" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
-                        <span class="card-category cat-{n['categoryClass']}">{n['category']}</span>
+                        <img src="{esc(n['img'])}" alt="{esc(n['title'])}" loading="lazy"
+                             onerror="this.src='{FALLBACK_IMAGES.get(n.get('catKey', 'geral'), FALLBACK_IMAGES['geral'])}'">
+                        <span class="card-category cat-{n['categoryClass']}">{esc(n['category'])}</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">{n['title']}</h3>
-                        <p class="card-summary">{n['summary']}</p>
+                        <h3 class="card-title">{esc(n['title'])}</h3>
+                        <p class="card-summary">{esc(n['summary'])}</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
-                                <div class="avatar">{n['source'][0]}</div>
-                                <span>{n['source']}</span>
+                                <div class="avatar">{esc(n['source'][0])}</div>
+                                <span>{esc(n['source'])}</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> {n['date']}</span>
+                            <span class="card-date"><i class="far fa-clock"></i> {esc(n['date'])}</span>
                         </div>
                     </div>
+                    </a>
                 </article>"""
 
-    # ---- Cards do hero ----
+    # ---- Slides do hero (usa a imagem da própria notícia, com fallback) ----
     hero_slides = ""
     hero_dots = ""
-    hero_images = [
-        "https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80",
-        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=80",
-        "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1920&q=80",
-        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80",
+    hero_fallbacks = [
+        "https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1200&q=80",
+        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
+        "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80",
+        "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80",
     ]
     for i, noticia in enumerate(destaques[:4]):
         active = "active" if i == 0 else ""
-        img = hero_images[i] if i < len(hero_images) else hero_images[0]
+        fallback = hero_fallbacks[i] if i < len(hero_fallbacks) else hero_fallbacks[0]
+        loading = 'fetchpriority="high"' if i == 0 else 'loading="lazy"'
         hero_slides += f"""
             <div class="hero-slide {active}" data-index="{i}">
-                <img src="{img}" alt="{noticia['title']}" class="hero-bg">
+                <img src="{esc(noticia['img'])}" alt="{esc(noticia['title'])}" class="hero-bg" {loading}
+                     onerror="this.src='{fallback}'">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
-                    <span class="hero-category">{noticia['category']}</span>
-                    <h2 class="hero-title">{noticia['title']}</h2>
-                    <p class="hero-subtitle">{noticia['summary'][:150]}...</p>
-                    <a href="{noticia['link']}" target="_blank" class="hero-btn">
+                    <span class="hero-category">{esc(noticia['category'])}</span>
+                    <h2 class="hero-title">{esc(noticia['title'])}</h2>
+                    <p class="hero-subtitle">{esc(noticia['summary'][:150])}...</p>
+                    <a href="{esc(noticia['link'])}" target="_blank" rel="noopener" class="hero-btn">
                         Ler Notícia Completa <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>"""
-        hero_dots += f'<button class="hero-dot {"active" if i == 0 else ""}" data-slide="{i}"></button>'
+        hero_dots += f'<button class="hero-dot {"active" if i == 0 else ""}" data-slide="{i}" aria-label="Ir para o destaque {i+1}"></button>'
 
-    # ---- Cards das seções ----
+    # ---- Cards das seções (sem repetir as notícias já usadas no hero) ----
     def secao_cards(lista, limite=4):
         return "".join(card_html(n) for n in lista[:limite])
 
-    top_news_html    = secao_cards(noticias_geral, 4)
-    more_news_html   = secao_cards(
-        (noticias_economia[:2] + noticias_tech[:2]), 4
-    )
-    politics_html    = secao_cards(noticias_politica, 4)
+    top_news_html    = secao_cards(noticias_geral[1:], 4)
+    more_news_html   = secao_cards(noticias_geral[5:], 3)
+    politics_html    = secao_cards(noticias_politica[1:], 4)
     tech_html        = secao_cards(noticias_tech, 4)
-    economy_html     = secao_cards(noticias_economia, 4)
-    sports_html      = secao_cards(noticias_esportes, 4)
+    economy_html     = secao_cards(noticias_economia[1:], 4)
+    sports_html      = secao_cards(noticias_esportes[1:], 4)
 
     # ---- Mais lidas (sidebar) ----
     mais_lidas = ""
@@ -325,13 +299,42 @@ def gerar_html(todas_noticias):
     tops = ["top-1", "top-2", "top-3", "", ""]
     for i, n in enumerate(todas_flat[:5]):
         mais_lidas += f"""
-                        <div class="most-read-item" onclick="window.open('{n['link']}','_blank')" style="cursor:pointer;">
+                        <a class="most-read-item" href="{esc(n['link'])}" target="_blank" rel="noopener">
                             <span class="mr-number {tops[i] if i < len(tops) else ''}">{i+1}</span>
                             <div class="mr-content">
-                                <h4>{n['title'][:80]}...</h4>
-                                <span>{n['date']} • {n['source']}</span>
+                                <h4>{esc(n['title'][:80])}...</h4>
+                                <span>{esc(n['date'])} • {esc(n['source'])}</span>
                             </div>
-                        </div>"""
+                        </a>"""
+
+    # ---- SEO: imagem de compartilhamento e dados estruturados ----
+    og_image = destaques[0]['img'] if destaques else FALLBACK_IMAGES['geral']
+    descricao_site = ("Voz Brasil: as últimas notícias do Brasil e do mundo — política, economia, "
+                      "tecnologia e esportes — reunidas de fontes confiáveis e atualizadas automaticamente.")
+    json_ld = json.dumps({
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "NewsMediaOrganization",
+                "@id": f"{SITE_URL}/#organization",
+                "name": "Voz Brasil",
+                "url": SITE_URL,
+                "description": descricao_site
+            },
+            {
+                "@type": "WebSite",
+                "@id": f"{SITE_URL}/#website",
+                "name": "Voz Brasil",
+                "url": SITE_URL,
+                "inLanguage": "pt-BR",
+                "publisher": {"@id": f"{SITE_URL}/#organization"}
+            }
+        ]
+    }, ensure_ascii=False)
+
+    favicon_svg = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E"
+                   "%3Crect width='64' height='64' rx='12' fill='%231e90ff'/%3E"
+                   "%3Cpath d='M14 20h28v6H14zm0 10h36v4H14zm0 8h36v4H14zm0 8h24v4H14z' fill='%23fff'/%3E%3C/svg%3E")
 
     # ============================================================
     # HTML COMPLETO
@@ -341,18 +344,31 @@ def gerar_html(todas_noticias):
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Voz Brasil - As últimas notícias do Brasil e do mundo em tempo real.">
-    <meta name="keywords" content="notícias, Brasil, mundo, política, tecnologia, economia, esportes">
+    <title>Voz Brasil — Notícias em Tempo Real: Política, Economia, Tecnologia e Esportes</title>
+    <meta name="description" content="{descricao_site}">
     <meta name="author" content="Voz Brasil">
-    <meta property="og:title" content="Voz Brasil - Portal de Notícias">
-    <meta property="og:description" content="As últimas notícias do Brasil e do mundo em tempo real.">
+    <link rel="canonical" href="{SITE_URL}/">
+    <meta name="theme-color" content="#0b1020">
+    <link rel="icon" href="{favicon_svg}">
+
+    <meta property="og:site_name" content="Voz Brasil">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="Voz Brasil — Portal de Notícias">
+    <meta property="og:description" content="{descricao_site}">
     <meta property="og:type" content="website">
-    <title>Voz Brasil - Notícias em Tempo Real</title>
+    <meta property="og:url" content="{SITE_URL}/">
+    <meta property="og:image" content="{esc(og_image)}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Voz Brasil — Portal de Notícias">
+    <meta name="twitter:description" content="{descricao_site}">
+    <meta name="twitter:image" content="{esc(og_image)}">
+
+    <script type="application/ld+json">{json_ld}</script>
     <!-- Atualizado automaticamente em: {data_atualizacao} -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -404,6 +420,8 @@ def gerar_html(todas_noticias):
         .ticker-track {{ display: flex; animation: ticker-scroll 40s linear infinite; white-space: nowrap; }}
         .ticker-track span {{ flex-shrink: 0; padding: 0 30px; color: #fff; font-size: 0.82rem; }}
         .ticker-track span a {{ color: #fff; text-decoration: none; }}
+        .ticker-track span a:hover {{ text-decoration: underline; }}
+        .breaking-news-bar:hover .ticker-track {{ animation-play-state: paused; }}
         @keyframes ticker-scroll {{ 0%{{transform:translateX(0)}} 100%{{transform:translateX(-50%)}} }}
 
         /* HEADER */
@@ -440,7 +458,7 @@ def gerar_html(todas_noticias):
 
         /* HERO */
         .hero {{ margin-top: 70px; position: relative; overflow: hidden; }}
-        .hero-slider {{ position: relative; width: 100%; height: 520px; overflow: hidden; }}
+        .hero-slider {{ position: relative; width: 100%; height: min(520px, 75vh); overflow: hidden; }}
         .hero-slide {{ position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }}
         .hero-slide.active {{ opacity: 1; }}
         .hero-bg {{ width: 100%; height: 100%; object-fit: cover; }}
@@ -489,6 +507,8 @@ def gerar_html(todas_noticias):
         .card-author span {{ font-size: 0.8rem; color: var(--gray-mid); }}
         .card-date {{ font-size: 0.75rem; color: var(--gray-mid); display: flex; align-items: center; gap: 4px; }}
         .card-read-more {{ display: inline-flex; align-items: center; gap: 6px; color: var(--blue-neon); font-size: 0.82rem; font-weight: 600; margin-top: 12px; }}
+        .card-link {{ display: block; color: inherit; text-decoration: none; height: 100%; }}
+        .news-card.hidden-by-search {{ display: none; }}
 
         /* MAIN LAYOUT */
         .main-layout {{ display: grid; grid-template-columns: 1fr 340px; gap: 30px; padding: 40px 0; }}
@@ -498,7 +518,7 @@ def gerar_html(todas_noticias):
         .sidebar-widget {{ background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 24px; }}
         .sidebar-widget h3 {{ font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--glass-border); }}
         .sidebar-widget h3 i {{ color: var(--blue-neon); }}
-        .most-read-item {{ display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: all var(--transition-fast); }}
+        .most-read-item {{ display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: all var(--transition-fast); text-decoration: none; }}
         .most-read-item:last-child {{ border-bottom: none; }}
         .most-read-item:hover {{ padding-left: 6px; }}
         .mr-number {{ width: 28px; height: 28px; border-radius: 6px; background: var(--blue-light); color: var(--blue-neon); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }}
@@ -559,6 +579,18 @@ def gerar_html(todas_noticias):
         .back-to-top.visible {{ opacity: 1; visibility: visible; transform: translateY(0); }}
         .back-to-top:hover {{ background: #fff; color: var(--blue-neon); transform: translateY(-3px); }}
 
+        /* FEEDBACK DE FORMULÁRIO */
+        .form-msg {{ font-size: 0.82rem; margin-top: 10px; display: none; }}
+        .form-msg.ok {{ display: block; color: #2ecc71; }}
+        .form-msg.erro {{ display: block; color: #e74c3c; }}
+        .search-no-results {{ display: none; padding: 30px 0; color: var(--gray-mid); font-size: 0.95rem; text-align: center; }}
+
+        /* ACESSIBILIDADE: reduz animações para quem prefere menos movimento */
+        @media (prefers-reduced-motion: reduce) {{
+            *, *::before, *::after {{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }}
+            html {{ scroll-behavior: auto; }}
+        }}
+
         /* RESPONSIVE */
         @media (max-width: 1024px) {{
             .main-layout {{ grid-template-columns: 1fr; }}
@@ -584,7 +616,7 @@ def gerar_html(todas_noticias):
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
-                <a href="#"><i class="fas fa-map-marker-alt"></i> Brasil</a>
+                <span><i class="fas fa-map-marker-alt" style="color:var(--blue-neon);"></i> Brasil</span>
                 <span class="update-badge"><i class="fas fa-sync-alt"></i> Atualizado em {data_atualizacao}</span>
             </div>
             <div class="datetime-display">
@@ -609,15 +641,15 @@ def gerar_html(todas_noticias):
     <!-- HEADER -->
     <header class="header" id="header">
         <div class="container">
-            <a href="#" class="logo">
+            <a href="/" class="logo" aria-label="Voz Brasil - Página inicial">
                 <div class="logo-icon"><i class="fas fa-newspaper"></i></div>
                 <div>
-                    <div class="logo-text">Voz <span>Brasil</span></div>
+                    <h1 class="logo-text">Voz <span>Brasil</span></h1>
                     <div class="logo-subtitle">Portal de Notícias</div>
                 </div>
             </a>
             <nav class="nav-desktop">
-                <a href="#" class="active">Home</a>
+                <a href="/" class="active">Home</a>
                 <a href="#breaking">Última Hora</a>
                 <a href="#politics">Política</a>
                 <a href="#technology">Tecnologia</a>
@@ -626,7 +658,7 @@ def gerar_html(todas_noticias):
             </nav>
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Buscar notícias...">
+                <input type="search" class="search-input" id="searchInput" placeholder="Buscar notícias..." aria-label="Buscar notícias">
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
@@ -637,7 +669,7 @@ def gerar_html(todas_noticias):
     <!-- MOBILE NAV -->
     <div class="mobile-nav-overlay" id="mobileOverlay"></div>
     <nav class="mobile-nav" id="mobileNav">
-        <a href="#" class="active">Home</a>
+        <a href="/" class="active">Home</a>
         <a href="#breaking">Última Hora</a>
         <a href="#politics">Política</a>
         <a href="#technology">Tecnologia</a>
@@ -661,6 +693,8 @@ def gerar_html(todas_noticias):
         <div class="container">
             <div class="main-layout">
                 <div class="main-content">
+
+                    <p class="search-no-results" id="searchNoResults">Nenhuma notícia encontrada. Tente outra palavra-chave.</p>
 
                     <!-- ÚLTIMAS NOTÍCIAS -->
                     <section id="breaking">
@@ -694,19 +728,22 @@ def gerar_html(todas_noticias):
                     <div class="sidebar-widget">
                         <h3><i class="fas fa-chart-line"></i> Assuntos em Alta</h3>
                         <div class="trending-tags">
-                            <a href="#" class="trending-tag">#Política</a>
-                            <a href="#" class="trending-tag">#Economia</a>
-                            <a href="#" class="trending-tag">#Tecnologia</a>
-                            <a href="#" class="trending-tag">#Esportes</a>
-                            <a href="#" class="trending-tag">#Brasil</a>
-                            <a href="#" class="trending-tag">#Mundo</a>
+                            <a href="#politics" class="trending-tag">#Política</a>
+                            <a href="#economy" class="trending-tag">#Economia</a>
+                            <a href="#technology" class="trending-tag">#Tecnologia</a>
+                            <a href="#sports" class="trending-tag">#Esportes</a>
+                            <a href="#breaking" class="trending-tag">#Brasil</a>
+                            <a href="#breaking" class="trending-tag">#Mundo</a>
                         </div>
                     </div>
                     <div class="sidebar-widget newsletter-sidebar">
                         <h3 style="border:none;padding-bottom:0;"><i class="fas fa-envelope-open-text"></i> Newsletter</h3>
                         <p>Receba as principais notícias no seu e-mail.</p>
-                        <input type="email" class="email-input" placeholder="Seu melhor e-mail...">
-                        <button class="sidebar-submit"><i class="fas fa-paper-plane"></i> Inscrever-se</button>
+                        <form class="js-newsletter">
+                            <input type="email" class="email-input" placeholder="Seu melhor e-mail..." aria-label="Seu e-mail" required>
+                            <button type="submit" class="sidebar-submit"><i class="fas fa-paper-plane"></i> Inscrever-se</button>
+                            <p class="form-msg" role="status"></p>
+                        </form>
                     </div>
                 </aside>
             </div>
@@ -750,7 +787,7 @@ def gerar_html(todas_noticias):
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title"><i class="fas fa-trophy"></i> Esportes</h2>
-                    <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: Lance</span>
+                    <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: ge</span>
                 </div>
                 <div class="news-grid news-grid-4">{sports_html}</div>
             </div>
@@ -762,10 +799,11 @@ def gerar_html(todas_noticias):
                 <div class="newsletter-inner">
                     <h2>Fique por dentro de tudo com a <span>Voz Brasil</span></h2>
                     <p>Receba diariamente as principais notícias do Brasil e do mundo. 100% gratuito.</p>
-                    <div class="newsletter-form">
-                        <input type="email" placeholder="Digite seu melhor e-mail...">
-                        <button><i class="fas fa-paper-plane"></i> Receber Notícias</button>
-                    </div>
+                    <form class="newsletter-form js-newsletter">
+                        <input type="email" placeholder="Digite seu melhor e-mail..." aria-label="Seu e-mail" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Receber Notícias</button>
+                    </form>
+                    <p class="form-msg" role="status" style="margin-top:14px;"></p>
                 </div>
             </div>
         </section>
@@ -776,7 +814,7 @@ def gerar_html(todas_noticias):
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <a href="#" class="logo">
+                    <a href="/" class="logo" aria-label="Voz Brasil - Página inicial">
                         <div class="logo-icon"><i class="fas fa-newspaper"></i></div>
                         <div>
                             <div class="logo-text">Voz <span>Brasil</span></div>
@@ -785,16 +823,16 @@ def gerar_html(todas_noticias):
                     </a>
                     <p>O Voz Brasil traz informações precisas e cobertura completa dos acontecimentos nacionais e internacionais.</p>
                     <div class="footer-social">
-                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Navegação</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="#breaking">Última Hora</a></li>
                         <li><a href="#politics">Política</a></li>
                         <li><a href="#technology">Tecnologia</a></li>
@@ -807,32 +845,30 @@ def gerar_html(todas_noticias):
                     <ul>
                         <li><a href="https://www.cnnbrasil.com.br" target="_blank">CNN Brasil</a></li>
                         <li><a href="https://exame.com" target="_blank">Exame</a></li>
-                        <li><a href="https://www.lance.com.br" target="_blank">Lance</a></li>
-                        <li><a href="https://adrenaline.com" target="_blank">Adrenaline</a></li>
+                        <li><a href="https://ge.globo.com" target="_blank" rel="noopener">ge (Globo Esporte)</a></li>
+                        <li><a href="https://www.adrenaline.com.br" target="_blank" rel="noopener">Adrenaline</a></li>
                         <li><a href="https://revistaoeste.com" target="_blank">Revista Oeste</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Anuncie</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <li><a href="/privacidade.html">Política de Privacidade</a></li>
+                        <li><a href="/termos.html">Termos de Uso</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; {agora.year} <a href="#">Voz Brasil</a>. Notícias agregadas de fontes públicas.</p>
+                <p>&copy; {agora.year} <a href="/">Voz Brasil</a>. Notícias agregadas de fontes públicas.</p>
                 <div class="footer-bottom-links">
-                    <a href="#">Privacidade</a>
-                    <a href="#">Termos</a>
+                    <a href="/privacidade.html">Privacidade</a>
+                    <a href="/termos.html">Termos</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></button>
 
     <script>
         // RELÓGIO
@@ -840,7 +876,7 @@ def gerar_html(todas_noticias):
             const now = new Date();
             document.getElementById('clock').textContent = now.toLocaleDateString('pt-BR', {{weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}});
         }}
-        setInterval(updateClock, 1000); updateClock();
+        setInterval(updateClock, 30000); updateClock();
 
         // DARK MODE
         const toggle = document.getElementById('darkModeToggle');
@@ -887,6 +923,47 @@ def gerar_html(todas_noticias):
         let sliderInterval = setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000);
         function resetSlider() {{ clearInterval(sliderInterval); sliderInterval = setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000); }}
 
+        // Pausa o slider quando o mouse está sobre ele (facilita clicar na notícia)
+        const heroSliderEl = document.getElementById('heroSlider');
+        heroSliderEl.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+        heroSliderEl.addEventListener('mouseleave', resetSlider);
+
+        // BUSCA DE NOTÍCIAS (filtra os cards da página)
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('searchNoResults');
+        if (searchInput) {{
+            searchInput.addEventListener('input', () => {{
+                const q = searchInput.value.trim().toLowerCase();
+                let visiveis = 0;
+                document.querySelectorAll('.news-card').forEach(card => {{
+                    const combina = !q || card.textContent.toLowerCase().includes(q);
+                    card.classList.toggle('hidden-by-search', !combina);
+                    if (combina) {{ card.style.opacity = '1'; card.style.transform = 'translateY(0)'; visiveis++; }}
+                }});
+                noResults.style.display = (q && visiveis === 0) ? 'block' : 'none';
+            }});
+        }}
+
+        // NEWSLETTER (validação + confirmação; inscrição guardada localmente)
+        document.querySelectorAll('.js-newsletter').forEach(form => {{
+            form.addEventListener('submit', ev => {{
+                ev.preventDefault();
+                const input = form.querySelector('input[type="email"]');
+                const msg = form.querySelector('.form-msg') || form.parentElement.querySelector('.form-msg');
+                const email = input.value.trim();
+                if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {{
+                    msg.textContent = 'Digite um e-mail válido.';
+                    msg.className = 'form-msg erro';
+                    return;
+                }}
+                const lista = JSON.parse(localStorage.getItem('vb-newsletter') || '[]');
+                if (!lista.includes(email)) {{ lista.push(email); localStorage.setItem('vb-newsletter', JSON.stringify(lista)); }}
+                msg.textContent = 'Inscrição registrada! Obrigado pelo interesse.';
+                msg.className = 'form-msg ok';
+                input.value = '';
+            }});
+        }});
+
         // PARALLAX HERO
         window.addEventListener('scroll', () => {{
             const hero = document.querySelector('.hero-slider');
@@ -905,6 +982,83 @@ def gerar_html(todas_noticias):
 </html>"""
 
 # ============================================================
+# PÁGINAS ESTÁTICAS (SEO + legal)
+# ============================================================
+
+def _pagina_simples(titulo, corpo_html, descricao):
+    """Template básico para páginas internas, no mesmo visual do portal."""
+    return f"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{titulo} — Voz Brasil</title>
+    <meta name="description" content="{descricao}">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="{SITE_URL}/">
+    <meta name="theme-color" content="#0b1020">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {{ margin:0; padding:0; box-sizing:border-box; }}
+        body {{ font-family:'Roboto',sans-serif; background:#0b1020; color:#d1d5db; line-height:1.8; }}
+        .wrap {{ max-width:800px; margin:0 auto; padding:60px 20px; }}
+        h1 {{ font-family:'Montserrat',sans-serif; color:#fff; font-size:2rem; margin-bottom:8px; }}
+        h1 span {{ color:#1e90ff; }}
+        h2 {{ font-family:'Montserrat',sans-serif; color:#fff; font-size:1.15rem; margin:32px 0 10px; }}
+        p, li {{ font-size:0.95rem; color:#d1d5db; margin-bottom:12px; }}
+        ul {{ padding-left:24px; }}
+        a {{ color:#1e90ff; }}
+        .voltar {{ display:inline-block; margin-top:40px; background:#1e90ff; color:#fff; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; }}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>{titulo} — <span>Voz Brasil</span></h1>
+        {corpo_html}
+        <a class="voltar" href="/">← Voltar para a Home</a>
+    </div>
+</body>
+</html>"""
+
+def gerar_404():
+    corpo = """
+        <p style="font-size:5rem;font-family:'Montserrat',sans-serif;font-weight:800;color:#1e90ff;">404</p>
+        <p>A página que você procura não existe ou foi movida.</p>
+        <p>Volte para a página inicial e confira as últimas notícias.</p>"""
+    return _pagina_simples("Página não encontrada", corpo,
+                           "Página não encontrada no portal Voz Brasil.")
+
+def gerar_robots():
+    return f"""User-agent: *
+Allow: /
+
+Sitemap: {SITE_URL}/sitemap.xml
+"""
+
+def gerar_sitemap():
+    hoje = datetime.now().strftime("%Y-%m-%d")
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>{SITE_URL}/</loc>
+        <lastmod>{hoje}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>{SITE_URL}/privacidade.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>{SITE_URL}/termos.html</loc>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+</urlset>
+"""
+
+# ============================================================
 # MAIN
 # ============================================================
 def main():
@@ -915,7 +1069,7 @@ def main():
 
     todas_noticias = {}
     for chave, config in RSS_SOURCES.items():
-        noticias = buscar_noticias(chave, config, limite=6)
+        noticias = buscar_noticias(chave, config, limite=8)
         todas_noticias[chave] = noticias
 
     total = sum(len(v) for v in todas_noticias.values())
@@ -926,8 +1080,20 @@ def main():
 
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(html_content)
-
     print(f"✓ index.html gerado com sucesso! ({len(html_content):,} caracteres)")
+
+    # Obs.: privacidade.html e termos.html já existem no repositório e não são regeneradas aqui
+    print("Gerando páginas estáticas e arquivos de SEO...")
+    arquivos = {
+        "404.html":         gerar_404(),
+        "robots.txt":       gerar_robots(),
+        "sitemap.xml":      gerar_sitemap(),
+    }
+    for nome, conteudo in arquivos.items():
+        with open(nome, "w", encoding="utf-8") as f:
+            f.write(conteudo)
+        print(f"✓ {nome}")
+
     print("\n========================================\n")
 
 if __name__ == "__main__":

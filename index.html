@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Voz Brasil - As últimas notícias do Brasil e do mundo em tempo real.">
-    <meta name="keywords" content="notícias, Brasil, mundo, política, tecnologia, economia, esportes">
+    <title>Voz Brasil — Notícias em Tempo Real: Política, Economia, Tecnologia e Esportes</title>
+    <meta name="description" content="Voz Brasil: as últimas notícias do Brasil e do mundo — política, economia, tecnologia e esportes — reunidas de fontes confiáveis e atualizadas automaticamente.">
     <meta name="author" content="Voz Brasil">
-    <meta property="og:title" content="Voz Brasil - Portal de Notícias">
-    <meta property="og:description" content="As últimas notícias do Brasil e do mundo em tempo real.">
+    <link rel="canonical" href="https://voz-brasil.pages.dev/">
+    <meta name="theme-color" content="#0b1020">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231e90ff'/%3E%3Cpath d='M14 20h28v6H14zm0 10h36v4H14zm0 8h36v4H14zm0 8h24v4H14z' fill='%23fff'/%3E%3C/svg%3E">
+
+    <meta property="og:site_name" content="Voz Brasil">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="Voz Brasil — Portal de Notícias">
+    <meta property="og:description" content="Voz Brasil: as últimas notícias do Brasil e do mundo — política, economia, tecnologia e esportes — reunidas de fontes confiáveis e atualizadas automaticamente.">
     <meta property="og:type" content="website">
-    <title>Voz Brasil - Notícias em Tempo Real</title>
-    <!-- Atualizado automaticamente em: 01/07/2026 às 13:34 -->
+    <meta property="og:url" content="https://voz-brasil.pages.dev/">
+    <meta property="og:image" content="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/07/Design-sem-nome-33.jpg?w=200">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Voz Brasil — Portal de Notícias">
+    <meta name="twitter:description" content="Voz Brasil: as últimas notícias do Brasil e do mundo — política, economia, tecnologia e esportes — reunidas de fontes confiáveis e atualizadas automaticamente.">
+    <meta name="twitter:image" content="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/07/Design-sem-nome-33.jpg?w=200">
+
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "NewsMediaOrganization", "@id": "https://voz-brasil.pages.dev/#organization", "name": "Voz Brasil", "url": "https://voz-brasil.pages.dev", "description": "Voz Brasil: as últimas notícias do Brasil e do mundo — política, economia, tecnologia e esportes — reunidas de fontes confiáveis e atualizadas automaticamente."}, {"@type": "WebSite", "@id": "https://voz-brasil.pages.dev/#website", "name": "Voz Brasil", "url": "https://voz-brasil.pages.dev", "inLanguage": "pt-BR", "publisher": {"@id": "https://voz-brasil.pages.dev/#organization"}}]}</script>
+    <!-- Atualizado automaticamente em: 02/07/2026 às 17:57 -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -66,6 +79,8 @@
         .ticker-track { display: flex; animation: ticker-scroll 40s linear infinite; white-space: nowrap; }
         .ticker-track span { flex-shrink: 0; padding: 0 30px; color: #fff; font-size: 0.82rem; }
         .ticker-track span a { color: #fff; text-decoration: none; }
+        .ticker-track span a:hover { text-decoration: underline; }
+        .breaking-news-bar:hover .ticker-track { animation-play-state: paused; }
         @keyframes ticker-scroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
         /* HEADER */
@@ -102,7 +117,7 @@
 
         /* HERO */
         .hero { margin-top: 70px; position: relative; overflow: hidden; }
-        .hero-slider { position: relative; width: 100%; height: 520px; overflow: hidden; }
+        .hero-slider { position: relative; width: 100%; height: min(520px, 75vh); overflow: hidden; }
         .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; }
         .hero-slide.active { opacity: 1; }
         .hero-bg { width: 100%; height: 100%; object-fit: cover; }
@@ -151,6 +166,8 @@
         .card-author span { font-size: 0.8rem; color: var(--gray-mid); }
         .card-date { font-size: 0.75rem; color: var(--gray-mid); display: flex; align-items: center; gap: 4px; }
         .card-read-more { display: inline-flex; align-items: center; gap: 6px; color: var(--blue-neon); font-size: 0.82rem; font-weight: 600; margin-top: 12px; }
+        .card-link { display: block; color: inherit; text-decoration: none; height: 100%; }
+        .news-card.hidden-by-search { display: none; }
 
         /* MAIN LAYOUT */
         .main-layout { display: grid; grid-template-columns: 1fr 340px; gap: 30px; padding: 40px 0; }
@@ -160,7 +177,7 @@
         .sidebar-widget { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 14px; padding: 24px; }
         .sidebar-widget h3 { font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--glass-border); }
         .sidebar-widget h3 i { color: var(--blue-neon); }
-        .most-read-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: all var(--transition-fast); }
+        .most-read-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: all var(--transition-fast); text-decoration: none; }
         .most-read-item:last-child { border-bottom: none; }
         .most-read-item:hover { padding-left: 6px; }
         .mr-number { width: 28px; height: 28px; border-radius: 6px; background: var(--blue-light); color: var(--blue-neon); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
@@ -221,6 +238,18 @@
         .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         .back-to-top:hover { background: #fff; color: var(--blue-neon); transform: translateY(-3px); }
 
+        /* FEEDBACK DE FORMULÁRIO */
+        .form-msg { font-size: 0.82rem; margin-top: 10px; display: none; }
+        .form-msg.ok { display: block; color: #2ecc71; }
+        .form-msg.erro { display: block; color: #e74c3c; }
+        .search-no-results { display: none; padding: 30px 0; color: var(--gray-mid); font-size: 0.95rem; text-align: center; }
+
+        /* ACESSIBILIDADE: reduz animações para quem prefere menos movimento */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+            html { scroll-behavior: auto; }
+        }
+
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             .main-layout { grid-template-columns: 1fr; }
@@ -246,8 +275,8 @@
     <div class="top-bar">
         <div class="container">
             <div class="top-bar-left">
-                <a href="#"><i class="fas fa-map-marker-alt"></i> Brasil</a>
-                <span class="update-badge"><i class="fas fa-sync-alt"></i> Atualizado em 01/07/2026 às 13:34</span>
+                <span><i class="fas fa-map-marker-alt" style="color:var(--blue-neon);"></i> Brasil</span>
+                <span class="update-badge"><i class="fas fa-sync-alt"></i> Atualizado em 02/07/2026 às 17:57</span>
             </div>
             <div class="datetime-display">
                 <i class="far fa-clock"></i>
@@ -264,22 +293,22 @@
     <div class="breaking-news-bar">
         <div class="container" style="display:flex;align-items:center;">
             <div class="breaking-label"><i class="fas fa-bell"></i> AO VIVO</div>
-            <div class="ticker-track"><span><a href="#">CNN BRASIL: Inadimplência avança e bate recorde histórico em maio, aponta BC</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="#">EXAME: Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="#">REVISTA OESTE: Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="#">CNN BRASIL: Inadimplência avança e bate recorde histórico em maio, aponta BC</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="#">EXAME: Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="#">REVISTA OESTE: Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span></div>
+            <div class="ticker-track"><span><a href="https://www.cnnbrasil.com.br/pop/eliezer-explica-bastidores-de-reality-polemico-e-remuneracao-de-empregados/" target="_blank" rel="noopener">CNN BRASIL: Eliezer explica bastidores de reality polêmico e remuneração de empregados</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://exame.com/pop/por-que-os-minions-falam-daquele-jeito-criador-explica-a-origem-do-fenomeno/" target="_blank" rel="noopener">EXAME: Por que os Minions falam daquele jeito? Criador explica a origem do fenômeno</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://ge.globo.com/futebol/copa-do-mundo/jogo/02-07-2026/espanha-austria.ghtml" target="_blank" rel="noopener">GE: Espanha x Áustria - Copa do Mundo 2026 - Ao vivo - globoesporte.com</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://www.adrenaline.com.br/games/codigos-brawl-stars-veja-lista-de-julho-de-2026-e-como-resgatar/" target="_blank" rel="noopener">ADRENALINE: Códigos Brawl Stars: veja lista de julho de 2026 e como resgatar</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://revistaoeste.com/videos/oeste-sem-filtro/oeste-sem-filtro-assista-ao-programa-de-2-7-2026/" target="_blank" rel="noopener">REVISTA OESTE: Oeste Sem Filtro: assista ao programa de 2/7/2026</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://www.cnnbrasil.com.br/pop/eliezer-explica-bastidores-de-reality-polemico-e-remuneracao-de-empregados/" target="_blank" rel="noopener">CNN BRASIL: Eliezer explica bastidores de reality polêmico e remuneração de empregados</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://exame.com/pop/por-que-os-minions-falam-daquele-jeito-criador-explica-a-origem-do-fenomeno/" target="_blank" rel="noopener">EXAME: Por que os Minions falam daquele jeito? Criador explica a origem do fenômeno</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://ge.globo.com/futebol/copa-do-mundo/jogo/02-07-2026/espanha-austria.ghtml" target="_blank" rel="noopener">GE: Espanha x Áustria - Copa do Mundo 2026 - Ao vivo - globoesporte.com</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://www.adrenaline.com.br/games/codigos-brawl-stars-veja-lista-de-julho-de-2026-e-como-resgatar/" target="_blank" rel="noopener">ADRENALINE: Códigos Brawl Stars: veja lista de julho de 2026 e como resgatar</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span><span><a href="https://revistaoeste.com/videos/oeste-sem-filtro/oeste-sem-filtro-assista-ao-programa-de-2-7-2026/" target="_blank" rel="noopener">REVISTA OESTE: Oeste Sem Filtro: assista ao programa de 2/7/2026</a></span><span style="color:rgba(255,255,255,0.4);padding:0 10px;">• • •</span></div>
         </div>
     </div>
 
     <!-- HEADER -->
     <header class="header" id="header">
         <div class="container">
-            <a href="#" class="logo">
+            <a href="/" class="logo" aria-label="Voz Brasil - Página inicial">
                 <div class="logo-icon"><i class="fas fa-newspaper"></i></div>
                 <div>
-                    <div class="logo-text">Voz <span>Brasil</span></div>
+                    <h1 class="logo-text">Voz <span>Brasil</span></h1>
                     <div class="logo-subtitle">Portal de Notícias</div>
                 </div>
             </a>
             <nav class="nav-desktop">
-                <a href="#" class="active">Home</a>
+                <a href="/" class="active">Home</a>
                 <a href="#breaking">Última Hora</a>
                 <a href="#politics">Política</a>
                 <a href="#technology">Tecnologia</a>
@@ -288,7 +317,7 @@
             </nav>
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-input" placeholder="Buscar notícias...">
+                <input type="search" class="search-input" id="searchInput" placeholder="Buscar notícias..." aria-label="Buscar notícias">
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span><span></span><span></span>
@@ -299,7 +328,7 @@
     <!-- MOBILE NAV -->
     <div class="mobile-nav-overlay" id="mobileOverlay"></div>
     <nav class="mobile-nav" id="mobileNav">
-        <a href="#" class="active">Home</a>
+        <a href="/" class="active">Home</a>
         <a href="#breaking">Última Hora</a>
         <a href="#politics">Política</a>
         <a href="#technology">Tecnologia</a>
@@ -312,45 +341,61 @@
         <div class="hero-slider" id="heroSlider">
             
             <div class="hero-slide active" data-index="0">
-                <img src="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1920&q=80" alt="Inadimplência avança e bate recorde histórico em maio, aponta BC" class="hero-bg">
+                <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/07/Design-sem-nome-33.jpg?w=200" alt="Eliezer explica bastidores de reality polêmico e remuneração de empregados" class="hero-bg" fetchpriority="high"
+                     onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=1200&q=80'">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <span class="hero-category">Notícias</span>
-                    <h2 class="hero-title">Inadimplência avança e bate recorde histórico em maio, aponta BC</h2>
-                    <p class="hero-subtitle">Resultado ocorre no mês de lançamento do Desenrola 2.0, programa do governo para renegociar dívidas...</p>
-                    <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/inadimplencia-avanca-e-bate-recorde-historico-em-maio-aponta-bc/" target="_blank" class="hero-btn">
+                    <h2 class="hero-title">Eliezer explica bastidores de reality polêmico e remuneração de empregados</h2>
+                    <p class="hero-subtitle">Influenciador afirma que todos assinaram contrato, recebem por episódio e direitos de imagem pela participação...</p>
+                    <a href="https://www.cnnbrasil.com.br/pop/eliezer-explica-bastidores-de-reality-polemico-e-remuneracao-de-empregados/" target="_blank" rel="noopener" class="hero-btn">
                         Ler Notícia Completa <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
             <div class="hero-slide " data-index="1">
-                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1920&q=80" alt="Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia" class="hero-bg">
+                <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/07/oeste-sem-filtro-dia-2-de-julho-.jpeg" alt="Oeste Sem Filtro: assista ao programa de 2/7/2026" class="hero-bg" loading="lazy"
+                     onerror="this.src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80'">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <span class="hero-category">Política</span>
-                    <h2 class="hero-title">Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia</h2>
-                    <p class="hero-subtitle">O ex-prefeito de Salvador ACM Neto lidera as intenções de voto para o governo da Bahia com 49,2% da preferência dos eleitores. O atual governador do E...</p>
-                    <a href="https://revistaoeste.com/politica/parana-pesquisas-acm-neto-lidera-corrida-ao-governo-da-bahia/" target="_blank" class="hero-btn">
+                    <h2 class="hero-title">Oeste Sem Filtro: assista ao programa de 2/7/2026</h2>
+                    <p class="hero-subtitle">Acompanhe mais uma edição do programa Oeste Sem Filtro. A atração vai ao ar de segunda a sexta-feira, das 17h45 às 19h45. Apresentação: Paula Leal. Os...</p>
+                    <a href="https://revistaoeste.com/videos/oeste-sem-filtro/oeste-sem-filtro-assista-ao-programa-de-2-7-2026/" target="_blank" rel="noopener" class="hero-btn">
                         Ler Notícia Completa <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
             <div class="hero-slide " data-index="2">
-                <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1920&q=80" alt="Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida" class="hero-bg">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&amp;q=80" alt="Por que os Minions falam daquele jeito? Criador explica a origem do fenômeno" class="hero-bg" loading="lazy"
+                     onerror="this.src='https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&q=80'">
                 <div class="hero-overlay"></div>
                 <div class="hero-content">
                     <span class="hero-category">Economia</span>
-                    <h2 class="hero-title">Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida</h2>
-                    <p class="hero-subtitle">Investigação sobre pistola apreendida em blitz termina sem indiciamento de Bolsonaro e segue no STF para análise da prisão domiciliar...</p>
-                    <a href="https://exame.com/brasil/policia-do-df-descarta-crime-de-bolsonaro-em-caso-de-arma-apreendida/" target="_blank" class="hero-btn">
+                    <h2 class="hero-title">Por que os Minions falam daquele jeito? Criador explica a origem do fenômeno</h2>
+                    <p class="hero-subtitle">Diretor e dublador dos personagens explicou como desenvolveu o &quot;minionês&quot; e revelou o processo que mantém a linguagem divertida há mais de 15 anos...</p>
+                    <a href="https://exame.com/pop/por-que-os-minions-falam-daquele-jeito-criador-explica-a-origem-do-fenomeno/" target="_blank" rel="noopener" class="hero-btn">
                         Ler Notícia Completa <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
-            <div class="hero-nav" id="heroNav"><button class="hero-dot active" data-slide="0"></button><button class="hero-dot " data-slide="1"></button><button class="hero-dot " data-slide="2"></button></div>
+            <div class="hero-slide " data-index="3">
+                <img src="https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&amp;q=80" alt="Espanha x Áustria - Copa do Mundo 2026 - Ao vivo - globoesporte.com" class="hero-bg" loading="lazy"
+                     onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80'">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <span class="hero-category">Esportes</span>
+                    <h2 class="hero-title">Espanha x Áustria - Copa do Mundo 2026 - Ao vivo - globoesporte.com</h2>
+                    <p class="hero-subtitle">Copa do Mundo 2026 no globoesporte.com - acompanhe tudo sobre Espanha x Áustria: escalação, informações sobre o jogo, fotos e muito mais...</p>
+                    <a href="https://ge.globo.com/futebol/copa-do-mundo/jogo/02-07-2026/espanha-austria.ghtml" target="_blank" rel="noopener" class="hero-btn">
+                        Ler Notícia Completa <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-nav" id="heroNav"><button class="hero-dot active" data-slide="0" aria-label="Ir para o destaque 1"></button><button class="hero-dot " data-slide="1" aria-label="Ir para o destaque 2"></button><button class="hero-dot " data-slide="2" aria-label="Ir para o destaque 3"></button><button class="hero-dot " data-slide="3" aria-label="Ir para o destaque 4"></button></div>
         </div>
         <div class="hero-slide-counter">
-            <span id="currentSlide">1</span> / <span>3</span>
+            <span id="currentSlide">1</span> / <span>4</span>
         </div>
     </section>
 
@@ -360,6 +405,8 @@
             <div class="main-layout">
                 <div class="main-content">
 
+                    <p class="search-no-results" id="searchNoResults">Nenhuma notícia encontrada. Tente outra palavra-chave.</p>
+
                     <!-- ÚLTIMAS NOTÍCIAS -->
                     <section id="breaking">
                         <div class="section-header">
@@ -367,81 +414,89 @@
                         </div>
                         <div class="news-grid news-grid-4">
                             
-                <article class="news-card " onclick="window.open('https://www.cnnbrasil.com.br/economia/macroeconomia/inadimplencia-avanca-e-bate-recorde-historico-em-maio-aponta-bc/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/economia/negocios/microsoft-lanca-empresa-para-ajudar-companhias-a-adotarem-ia/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2021/08/20343_5607596EA93A59E5.jpg?w=200" alt="Inadimplência avança e bate recorde histórico em maio, aponta BC" loading="lazy"
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/durigan-1_9f699c.jpg?w=200" alt="Microsoft lança empresa para ajudar companhias a adotarem IA" loading="lazy"
                              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
                         <span class="card-category cat-world">Notícias</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Inadimplência avança e bate recorde histórico em maio, aponta BC</h3>
-                        <p class="card-summary">Resultado ocorre no mês de lançamento do Desenrola 2.0, programa do governo para renegociar dívidas</p>
+                        <h3 class="card-title">Microsoft lança empresa para ajudar companhias a adotarem IA</h3>
+                        <p class="card-summary">Microsoft Frontier Company, como a nova entidade operacional é chamada, iniciará com um financiamento de US$ 2,5 bilhões da gigante da tecnologia para trabalhar com clientes como Unilever e Novo Nordi...</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">C</div>
                                 <span>CNN Brasil</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 23 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 19 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://www.cnnbrasil.com.br/nacional/sul/rs/enchentes-de-2024-no-rs-afetaram-mais-de-6-milhoes-de-pessoas-estima-ibge/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/lukaku-se-isola-como-maior-artilheiro-da-belgica-em-copas-do-mundo/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/image-9.jpg?w=668" alt="Enchentes de 2024 no RS afetaram mais de 6 milhões de pessoas, estima IBGE" loading="lazy"
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/Captura-de-tela-2026-07-02-162928.png?w=200" alt="Lukaku se isola como maior artilheiro da Bélgica em Copas do Mundo" loading="lazy"
                              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
                         <span class="card-category cat-world">Notícias</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Enchentes de 2024 no RS afetaram mais de 6 milhões de pessoas, estima IBGE</h3>
-                        <p class="card-summary">Pesquisa Especial sobre as Enchentes de 2024 no Rio Grande do Sul também analisou como ficou a vida dos moradores do estado um ano após tragédia climática</p>
+                        <h3 class="card-title">Lukaku se isola como maior artilheiro da Bélgica em Copas do Mundo</h3>
+                        <p class="card-summary">Centroavante chegou ao sétimo gol em Mundiais ao marcar contra o Senegal</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">C</div>
                                 <span>CNN Brasil</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 23 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 21 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://www.cnnbrasil.com.br/pop/celebridades/chris-brown-deve-pagar-r-67-milhoes-a-funcionaria-por-ataque-de-cachorro/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/economia/macroeconomia/extincao-do-subsidio-ao-diesel-exige-cuidado-e-levara-tempo-diz-governo/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/07/viih-tube-reality-empregados.jpg?w=200" alt="Chris Brown deve pagar R$ 67 milhões a funcionária por ataque de cachorro" loading="lazy"
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/tagreuters.com2025binary_LYNXMPEL6U0PE-BASEIMAGE.webp?w=200" alt="Extinção do subsídio ao diesel exige cuidado e levará tempo, diz governo" loading="lazy"
                              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
                         <span class="card-category cat-world">Notícias</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Chris Brown deve pagar R$ 67 milhões a funcionária por ataque de cachorro</h3>
-                        <p class="card-summary">Mulher teve rosto desfigurado após ser atacada por um cão de 90 quilos do cantor em 2020</p>
+                        <h3 class="card-title">Extinção do subsídio ao diesel exige cuidado e levará tempo, diz governo</h3>
+                        <p class="card-summary">Governo anunciou nesta terça-feira (30) eliminação de subsídio de R$ 0,35 por litro de diesel a partir de 1º de julho</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">C</div>
                                 <span>CNN Brasil</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 26 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 21 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://www.cnnbrasil.com.br/pop/celebridades/carolina-dieckmmann-radicaliza-visual-apos-finalizar-a-viagem-veja/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/agro/colheita-de-cafe-avanca-para-249-na-area-monitorada-pela-cooxupe/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/carolina-dieckmmann.jpg?w=200" alt="Carolina Dieckmmann radicaliza visual após finalizar “A Viagem”; veja" loading="lazy"
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2026binary_LYNXMPEM52160-BASEIMAGE.jpg?w=200" alt="Colheita de café avança para 24,9% na área monitorada pela Cooxupé" loading="lazy"
                              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
                         <span class="card-category cat-world">Notícias</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Carolina Dieckmmann radicaliza visual após finalizar “A Viagem”; veja</h3>
-                        <p class="card-summary">Atriz passou por muitas mudanças nos últimos meses por causa dos trabalhos em novela e em filme</p>
+                        <h3 class="card-title">Colheita de café avança para 24,9% na área monitorada pela Cooxupé</h3>
+                        <p class="card-summary">Entre as regiões acompanhadas, o ritmo mais acelerado foi registrado nas Matas de Minas, onde 30% da produção já foi colhida</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">C</div>
                                 <span>CNN Brasil</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 29 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 21 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
                         </div>
                     </section>
@@ -455,43 +510,68 @@
                         </div>
                         <div class="news-grid news-grid-3">
                             
-                <article class="news-card " onclick="window.open('https://exame.com/brasil/policia-do-df-descarta-crime-de-bolsonaro-em-caso-de-arma-apreendida/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/pop/celebridades/madonna-fala-de-sean-penn-em-novo-album-se-sentia-ameacado-por-mim/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&q=80" alt="Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida" loading="lazy"
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/06/kylie-minogue-madonna.jpg?w=200" alt="Madonna fala de Sean Penn em novo álbum: “Se sentia ameaçado por mim”" loading="lazy"
                              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
-                        <span class="card-category cat-economy">Economia</span>
+                        <span class="card-category cat-world">Notícias</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida</h3>
-                        <p class="card-summary">Investigação sobre pistola apreendida em blitz termina sem indiciamento de Bolsonaro e segue no STF para análise da prisão domiciliar</p>
+                        <h3 class="card-title">Madonna fala de Sean Penn em novo álbum: “Se sentia ameaçado por mim”</h3>
+                        <p class="card-summary">Música da artista faz supostas referências ao ex-marido; entenda</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
-                                <div class="avatar">E</div>
-                                <span>Exame</span>
+                                <div class="avatar">C</div>
+                                <span>CNN Brasil</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 3h atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 24 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://exame.com/esporte/tecnico-da-noruega-manda-recado-a-ancelotti-antes-das-oitavas-estamos-chegando/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/politica/lula-critica-familia-bolsonaro-e-diz-que-brasil-nao-esta-a-venda/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="Técnico da Noruega manda recado a Ancelotti antes das oitavas: 'estamos chegando'" loading="lazy"
+                        <img src="https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/08/jair_renan2-e1692884025511.jpg?w=200" alt="Lula critica família Bolsonaro e diz que Brasil “não está à venda”" loading="lazy"
                              onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
-                        <span class="card-category cat-economy">Economia</span>
+                        <span class="card-category cat-world">Notícias</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Técnico da Noruega manda recado a Ancelotti antes das oitavas: 'estamos chegando'</h3>
-                        <p class="card-summary">Solbakken mandou recado ao treinador da Seleção após a classificação, enquanto Haaland afirmou que os noruegueses têm 'pequenas possibilidades' contra o Brasil</p>
+                        <h3 class="card-title">Lula critica família Bolsonaro e diz que Brasil “não está à venda”</h3>
+                        <p class="card-summary">Senador Flávio Bolsonaro encaminhou carta aos Estados Unidos solicitando a suspensão da medida proposta para taxar o Brasil, afirmando que tal imposição representaria &quot;vitória política&quot; para o atual p...</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
-                                <div class="avatar">E</div>
-                                <span>Exame</span>
+                                <div class="avatar">C</div>
+                                <span>CNN Brasil</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 3h atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 27 min atrás</span>
                         </div>
                     </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://www.cnnbrasil.com.br/branded-content/nacional/video-dados-e-creators-redesenham-a-publicidade/" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&amp;q=80" alt="Vídeo, dados e creators redesenham a publicidade" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <span class="card-category cat-world">Notícias</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Vídeo, dados e creators redesenham a publicidade</h3>
+                        <p class="card-summary">Mercado Ads apresentou novas soluções e discutiu tendências do marketing durante o Cannes Lions 2026</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">C</div>
+                                <span>CNN Brasil</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 29 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
                 </article>
                         </div>
                     </section>
@@ -502,58 +582,61 @@
                     <div class="sidebar-widget">
                         <h3><i class="fas fa-fire"></i> Mais Lidas</h3>
                         
-                        <div class="most-read-item" onclick="window.open('https://www.cnnbrasil.com.br/economia/macroeconomia/inadimplencia-avanca-e-bate-recorde-historico-em-maio-aponta-bc/','_blank')" style="cursor:pointer;">
+                        <a class="most-read-item" href="https://www.cnnbrasil.com.br/pop/eliezer-explica-bastidores-de-reality-polemico-e-remuneracao-de-empregados/" target="_blank" rel="noopener">
                             <span class="mr-number top-1">1</span>
                             <div class="mr-content">
-                                <h4>Inadimplência avança e bate recorde histórico em maio, aponta BC...</h4>
-                                <span>23 min atrás • CNN Brasil</span>
+                                <h4>Eliezer explica bastidores de reality polêmico e remuneração de empregados...</h4>
+                                <span>16 min atrás • CNN Brasil</span>
                             </div>
-                        </div>
-                        <div class="most-read-item" onclick="window.open('https://www.cnnbrasil.com.br/nacional/sul/rs/enchentes-de-2024-no-rs-afetaram-mais-de-6-milhoes-de-pessoas-estima-ibge/','_blank')" style="cursor:pointer;">
+                        </a>
+                        <a class="most-read-item" href="https://www.cnnbrasil.com.br/economia/negocios/microsoft-lanca-empresa-para-ajudar-companhias-a-adotarem-ia/" target="_blank" rel="noopener">
                             <span class="mr-number top-2">2</span>
                             <div class="mr-content">
-                                <h4>Enchentes de 2024 no RS afetaram mais de 6 milhões de pessoas, estima IBGE...</h4>
-                                <span>23 min atrás • CNN Brasil</span>
+                                <h4>Microsoft lança empresa para ajudar companhias a adotarem IA...</h4>
+                                <span>19 min atrás • CNN Brasil</span>
                             </div>
-                        </div>
-                        <div class="most-read-item" onclick="window.open('https://exame.com/brasil/policia-do-df-descarta-crime-de-bolsonaro-em-caso-de-arma-apreendida/','_blank')" style="cursor:pointer;">
+                        </a>
+                        <a class="most-read-item" href="https://exame.com/pop/por-que-os-minions-falam-daquele-jeito-criador-explica-a-origem-do-fenomeno/" target="_blank" rel="noopener">
                             <span class="mr-number top-3">3</span>
                             <div class="mr-content">
-                                <h4>Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida...</h4>
+                                <h4>Por que os Minions falam daquele jeito? Criador explica a origem do fenômeno...</h4>
                                 <span>3h atrás • Exame</span>
                             </div>
-                        </div>
-                        <div class="most-read-item" onclick="window.open('https://exame.com/esporte/tecnico-da-noruega-manda-recado-a-ancelotti-antes-das-oitavas-estamos-chegando/','_blank')" style="cursor:pointer;">
+                        </a>
+                        <a class="most-read-item" href="https://exame.com/inteligencia-artificial/ceo-da-uber-diz-que-tecnologia-podera-substituir-motoristas-de-aplicativo-na-proxima-decada/" target="_blank" rel="noopener">
                             <span class="mr-number ">4</span>
                             <div class="mr-content">
-                                <h4>Técnico da Noruega manda recado a Ancelotti antes das oitavas: 'estamos chegando...</h4>
+                                <h4>CEO da Uber diz que tecnologia poderá substituir motoristas de aplicativo na pró...</h4>
                                 <span>3h atrás • Exame</span>
                             </div>
-                        </div>
-                        <div class="most-read-item" onclick="window.open('https://revistaoeste.com/politica/parana-pesquisas-acm-neto-lidera-corrida-ao-governo-da-bahia/','_blank')" style="cursor:pointer;">
+                        </a>
+                        <a class="most-read-item" href="https://ge.globo.com/futebol/copa-do-mundo/jogo/02-07-2026/espanha-austria.ghtml" target="_blank" rel="noopener">
                             <span class="mr-number ">5</span>
                             <div class="mr-content">
-                                <h4>Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia...</h4>
-                                <span>7 min atrás • Revista Oeste</span>
+                                <h4>Espanha x Áustria - Copa do Mundo 2026 - Ao vivo - globoesporte.com...</h4>
+                                <span>21 min atrás • ge</span>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="sidebar-widget">
                         <h3><i class="fas fa-chart-line"></i> Assuntos em Alta</h3>
                         <div class="trending-tags">
-                            <a href="#" class="trending-tag">#Política</a>
-                            <a href="#" class="trending-tag">#Economia</a>
-                            <a href="#" class="trending-tag">#Tecnologia</a>
-                            <a href="#" class="trending-tag">#Esportes</a>
-                            <a href="#" class="trending-tag">#Brasil</a>
-                            <a href="#" class="trending-tag">#Mundo</a>
+                            <a href="#politics" class="trending-tag">#Política</a>
+                            <a href="#economy" class="trending-tag">#Economia</a>
+                            <a href="#technology" class="trending-tag">#Tecnologia</a>
+                            <a href="#sports" class="trending-tag">#Esportes</a>
+                            <a href="#breaking" class="trending-tag">#Brasil</a>
+                            <a href="#breaking" class="trending-tag">#Mundo</a>
                         </div>
                     </div>
                     <div class="sidebar-widget newsletter-sidebar">
                         <h3 style="border:none;padding-bottom:0;"><i class="fas fa-envelope-open-text"></i> Newsletter</h3>
                         <p>Receba as principais notícias no seu e-mail.</p>
-                        <input type="email" class="email-input" placeholder="Seu melhor e-mail...">
-                        <button class="sidebar-submit"><i class="fas fa-paper-plane"></i> Inscrever-se</button>
+                        <form class="js-newsletter">
+                            <input type="email" class="email-input" placeholder="Seu melhor e-mail..." aria-label="Seu e-mail" required>
+                            <button type="submit" class="sidebar-submit"><i class="fas fa-paper-plane"></i> Inscrever-se</button>
+                            <p class="form-msg" role="status"></p>
+                        </form>
                     </div>
                 </aside>
             </div>
@@ -567,81 +650,89 @@
                     <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: Revista Oeste</span>
                 </div>
                 <div class="news-grid news-grid-4">
-                <article class="news-card " onclick="window.open('https://revistaoeste.com/politica/parana-pesquisas-acm-neto-lidera-corrida-ao-governo-da-bahia/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://revistaoeste.com/politica/governo-federal-abre-escritorio-em-sp-para-combate-ao-crime-organizado/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2022/10/acm-neto.webp" alt="Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/07/governo-ministro-da-justica.webp" alt="Governo federal abre escritório em SP para combate ao crime organizado" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1523108021757-3b88e9e1cd85?w=600&q=80'">
                         <span class="card-category cat-politics">Política</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Paraná Pesquisas: ACM Neto lidera corrida ao governo da Bahia</h3>
-                        <p class="card-summary">O ex-prefeito de Salvador ACM Neto lidera as intenções de voto para o governo da Bahia com 49,2% da preferência dos eleitores. O atual governador do Estado, Jerônimo Rodrigues, aparece na segunda posi...</p>
+                        <h3 class="card-title">Governo federal abre escritório em SP para combate ao crime organizado</h3>
+                        <p class="card-summary">O Ministério da Justiça e Segurança Pública (MJSP) inaugurou nesta quarta-feira, 1º, o Escritório Nacional Antifacção de São Paulo (ENA/SP). A nova estrutura permanente tem como objetivo fortalecer a ...</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">R</div>
                                 <span>Revista Oeste</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 7 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 52 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://revistaoeste.com/no-ponto/motta-se-reune-com-governo-para-destravar-pautas-economicas/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://revistaoeste.com/politica/governo-lula-resiste-a-reajuste-automatico-do-teto-de-faturamento-do-mei/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/05/IMAGE-2026-05-28-075744.jpg" alt="Motta se reúne com governo para destravar pautas econômicas" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/05/shutterstock_2482053279.jpg" alt="Governo Lula resiste a reajuste automático do teto de faturamento do MEI" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1523108021757-3b88e9e1cd85?w=600&q=80'">
                         <span class="card-category cat-politics">Política</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Motta se reúne com governo para destravar pautas econômicas</h3>
-                        <p class="card-summary">O presidente da Câmara dos Deputados, Hugo Motta (Republicanos-PB), deve realizar nesta quarta-feira, 1º, uma nova rodada de negociações com integrantes do governo Lula para tentar destravar projetos ...</p>
+                        <h3 class="card-title">Governo Lula resiste a reajuste automático do teto de faturamento do MEI</h3>
+                        <p class="card-summary">O governo de Luiz Inácio Lula da Silva enfrenta pressão no Congresso para tornar automático o reajuste do limite de faturamento do microempreendedor individual (MEI). A proposta é defendida pelo relat...</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">R</div>
                                 <span>Revista Oeste</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 9 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 53 min atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://revistaoeste.com/politica/pf-mira-esquema-de-golpes-com-anuncios-falsos-e-uso-de-ia/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://revistaoeste.com/brasil/cidades-de-santa-catarina-decretam-emergencia-depois-de-temporais/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/05/agentes-da-policia-federal-1.jpg" alt="PF mira esquema de golpes com anúncios falsos e uso de IA" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2025/01/chuva-scaled.jpg" alt="Cidades de Santa Catarina decretam emergência depois de temporais" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1523108021757-3b88e9e1cd85?w=600&q=80'">
                         <span class="card-category cat-politics">Política</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">PF mira esquema de golpes com anúncios falsos e uso de IA</h3>
-                        <p class="card-summary">A Polícia Federal deflagrou nesta quarta-feira, 1º, a Operação AD Phishing, para aprofundar uma investigação sobre um esquema de anúncios fraudulentos que usava indevidamente a imagem do governo feder...</p>
+                        <h3 class="card-title">Cidades de Santa Catarina decretam emergência depois de temporais</h3>
+                        <p class="card-summary">Seis municípios do norte de Santa Catarina decretaram situação de emergência por causa das tempestades que castigaram a região entre a noite de terça-feira 30 e a madrugada desta quarta-feira, 1º. Os ...</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">R</div>
                                 <span>Revista Oeste</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 29 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 1h atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://revistaoeste.com/videos/oeste-com-elas/oeste-com-elas-assista-ao-programa-de-1o-7-2026/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://revistaoeste.com/brasil/inmet-alerta-para-queda-acentuada-de-temperatura-no-sul/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/06/oeste-com-elas-dia-1-de-julho.jpg" alt="Oeste com Elas: assista ao programa de 1º/7/2026" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://medias.revistaoeste.com/wp-content/uploads/2026/06/frio-no-sul.jpeg" alt="Inmet alerta para queda acentuada de temperatura no Sul" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1523108021757-3b88e9e1cd85?w=600&q=80'">
                         <span class="card-category cat-politics">Política</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Oeste com Elas: assista ao programa de 1º/7/2026</h3>
-                        <p class="card-summary">O Oeste com Elas vê com olhar afiado os principais fatos do Brasil e do mundo. Apresentado por Adriana Reid, Paula Camacho e Ludmila Lins, o programa é transmitido de segunda a sexta-feira, ao vivo, d...</p>
+                        <h3 class="card-title">Inmet alerta para queda acentuada de temperatura no Sul</h3>
+                        <p class="card-summary">O Instituto Nacional de Meteorologia (Inmet) emitiu, nesta quinta-feira, 2, um alerta laranja de perigo para queda acentuada de temperatura na Região Sul. O aviso permanece válido até as 9h desta sext...</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
                                 <div class="avatar">R</div>
                                 <span>Revista Oeste</span>
                             </div>
-                            <span class="card-date"><i class="far fa-clock"></i> 34 min atrás</span>
+                            <span class="card-date"><i class="far fa-clock"></i> 1h atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article></div>
             </div>
         </section>
@@ -653,7 +744,91 @@
                     <h2 class="section-title"><i class="fas fa-microchip"></i> Tecnologia</h2>
                     <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: Adrenaline</span>
                 </div>
-                <div class="news-grid news-grid-4"></div>
+                <div class="news-grid news-grid-4">
+                <article class="news-card ">
+                    <a href="https://www.adrenaline.com.br/games/codigos-brawl-stars-veja-lista-de-julho-de-2026-e-como-resgatar/" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://www.adrenaline.com.br/wp-content/uploads/2026/07/codigos-brawl-stars-veja-lista-de-julho-de-2026-e-como-resgatar-cover-640x400.jpg" alt="Códigos Brawl Stars: veja lista de julho de 2026 e como resgatar" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80'">
+                        <span class="card-category cat-tech">Tecnologia</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Códigos Brawl Stars: veja lista de julho de 2026 e como resgatar</h3>
+                        <p class="card-summary">Resgate os códigos de Brawl Stars ativos em julho e consiga skins, pins, moedas e personagens grátis antes que o limite de usos acabe!</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">A</div>
+                                <span>Adrenaline</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 19 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://www.adrenaline.com.br/games/fim-da-midia-fisica-deve-resultar-em-games-mais-caros-e-menos-descontos/" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://www.adrenaline.com.br/wp-content/uploads/2026/07/FIm-Midia-Fisica-PlayStation-Mercado-640x400.jpg" alt="Fim da mídia física deve resultar em games mais caros e menos descontos" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80'">
+                        <span class="card-category cat-tech">Tecnologia</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Fim da mídia física deve resultar em games mais caros e menos descontos</h3>
+                        <p class="card-summary">A PlayStation tende a ser a principal beneficiada com sua decisão de encerrar a produção em jogos de mídia física.</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">A</div>
+                                <span>Adrenaline</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 46 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://www.adrenaline.com.br/games/64gb-de-ram-cinder-city-divulga-requisitos-minimos-e-recomendados-para-rodar-no-pc/" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://www.adrenaline.com.br/wp-content/uploads/2026/07/02-cinder-city-64-ram-640x400.jpg" alt="[Atualizada] Cinder City divulga requisitos mínimos e recomendados para rodar no PC" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80'">
+                        <span class="card-category cat-tech">Tecnologia</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">[Atualizada] Cinder City divulga requisitos mínimos e recomendados para rodar no PC</h3>
+                        <p class="card-summary">Devs também recomendam um Intel Core i7-12700 ou AMD Ryzen 7 7800X3D e NVIDIA GeForce RTX 4060 (8 GB de VRAM).</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">A</div>
+                                <span>Adrenaline</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 59 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://www.adrenaline.com.br/games/codigos-clash-royale-veja-lista-de-julho-de-2026-e-como-resgatar/" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://www.adrenaline.com.br/wp-content/uploads/2026/07/codigos-clash-royale-veja-lista-de-julho-de-2026-e-como-resgatar-640x400.jpg" alt="Códigos Clash Royale: veja lista de julho de 2026 e como resgatar" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80'">
+                        <span class="card-category cat-tech">Tecnologia</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Códigos Clash Royale: veja lista de julho de 2026 e como resgatar</h3>
+                        <p class="card-summary">Códigos promocionais e de criador de Clash Royale em julho de 2026 entregam ouro, emotes exclusivos e cartas coringa épicas!</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">A</div>
+                                <span>Adrenaline</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 1h atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article></div>
             </div>
         </section>
 
@@ -665,15 +840,16 @@
                     <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: Exame</span>
                 </div>
                 <div class="news-grid news-grid-4">
-                <article class="news-card " onclick="window.open('https://exame.com/brasil/policia-do-df-descarta-crime-de-bolsonaro-em-caso-de-arma-apreendida/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://exame.com/inteligencia-artificial/ceo-da-uber-diz-que-tecnologia-podera-substituir-motoristas-de-aplicativo-na-proxima-decada/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&q=80" alt="Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&amp;q=80" alt="CEO da Uber diz que tecnologia poderá substituir motoristas de aplicativo na próxima década" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'">
                         <span class="card-category cat-economy">Economia</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Polícia do DF descarta crime de Bolsonaro em caso de arma apreendida</h3>
-                        <p class="card-summary">Investigação sobre pistola apreendida em blitz termina sem indiciamento de Bolsonaro e segue no STF para análise da prisão domiciliar</p>
+                        <h3 class="card-title">CEO da Uber diz que tecnologia poderá substituir motoristas de aplicativo na próxima década</h3>
+                        <p class="card-summary">O executivo afirma que o avanço dos veículos autônomos deve transformar o setor de transporte nos próximos anos, reduzindo gradualmente a necessidade de motoristas humanos em algumas operações</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
@@ -683,16 +859,18 @@
                             <span class="card-date"><i class="far fa-clock"></i> 3h atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://exame.com/esporte/tecnico-da-noruega-manda-recado-a-ancelotti-antes-das-oitavas-estamos-chegando/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://exame.com/invest/mercados/ibovespa-fecha-em-alta-com-payroll-abaixo-do-esperado-dolar-fica-estavel/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80" alt="Técnico da Noruega manda recado a Ancelotti antes das oitavas: 'estamos chegando'" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&amp;q=80" alt="Ibovespa fecha em alta com &#x27;payroll&#x27; abaixo do esperado; dólar fica estável" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'">
                         <span class="card-category cat-economy">Economia</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Técnico da Noruega manda recado a Ancelotti antes das oitavas: 'estamos chegando'</h3>
-                        <p class="card-summary">Solbakken mandou recado ao treinador da Seleção após a classificação, enquanto Haaland afirmou que os noruegueses têm 'pequenas possibilidades' contra o Brasil</p>
+                        <h3 class="card-title">Ibovespa fecha em alta com &#x27;payroll&#x27; abaixo do esperado; dólar fica estável</h3>
+                        <p class="card-summary">O relatório oficial de emprego dos Estados Unidos mostrou a criação de apenas 57 mil vagas em junho, bem abaixo das expectativas do mercado</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
@@ -702,16 +880,18 @@
                             <span class="card-date"><i class="far fa-clock"></i> 3h atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://exame.com/brasil/parana-pesquisas-rui-costa-e-jaques-wagner-lideram-corrida-ao-senado-na-bahia/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://exame.com/esporte/quem-vai-ganhar-a-copa-do-mundo-veja-a-previsao-do-supercomputador-da-opta-sobre-a-selecao-campea/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&q=80" alt="Paraná Pesquisas: Rui Costa e Jaques Wagner lideram corrida ao Senado na Bahia" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&amp;q=80" alt="Quem vai ganhar a Copa do Mundo? Veja a previsão do supercomputador da Opta sobre a seleção campeã" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'">
                         <span class="card-category cat-economy">Economia</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Paraná Pesquisas: Rui Costa e Jaques Wagner lideram corrida ao Senado na Bahia</h3>
-                        <p class="card-summary">Este é o primeiro levantamento desde que o senador virou alvo da Operação Compliance Zero, que investiga o esquema de fraudes do Banco Master, de Daniel Vorcaro</p>
+                        <h3 class="card-title">Quem vai ganhar a Copa do Mundo? Veja a previsão do supercomputador da Opta sobre a seleção campeã</h3>
+                        <p class="card-summary">Sistema cruzou desempenho histórico e recente das seleções, atribui probabilidades aos confrontos</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
@@ -721,16 +901,18 @@
                             <span class="card-date"><i class="far fa-clock"></i> 3h atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article>
-                <article class="news-card " onclick="window.open('https://exame.com/inteligencia-artificial/apptronik-inaugura-parque-de-robos-para-acelerar-treinamento-com-inteligencia-artificial/','_blank')" style="cursor:pointer;">
+                <article class="news-card ">
+                    <a href="https://exame.com/casual/em-sao-paulo-festa-do-cinema-italiano-por-generali-continua-no-bijou/" target="_blank" rel="noopener" class="card-link">
                     <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&q=80" alt="Apptronik inaugura parque de robôs para acelerar treinamento com inteligência artificial" loading="lazy"
-                             onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168d6c?w=600&q=80'">
+                        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&amp;q=80" alt="Em São Paulo, Festa do Cinema Italiano por Generali continua no Bijou" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80'">
                         <span class="card-category cat-economy">Economia</span>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">Apptronik inaugura parque de robôs para acelerar treinamento com inteligência artificial</h3>
-                        <p class="card-summary">Empresa americana inaugura centro de treinamento para robôs humanoides, com foco na coleta de dados que aceleram o desenvolvimento da inteligência artificial aplicada à indústria</p>
+                        <h3 class="card-title">Em São Paulo, Festa do Cinema Italiano por Generali continua no Bijou</h3>
+                        <p class="card-summary">A 13ª edição da &#x27;8 ½ Festa do Cinema Italiano por Generali&#x27; ocupa a tradicional sala da Praça Roosevelt com dez títulos de destaque e exibições em cópia restaurada</p>
                         <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
                         <div class="card-meta">
                             <div class="card-author">
@@ -740,6 +922,7 @@
                             <span class="card-date"><i class="far fa-clock"></i> 3h atrás</span>
                         </div>
                     </div>
+                    </a>
                 </article></div>
             </div>
         </section>
@@ -749,9 +932,93 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title"><i class="fas fa-trophy"></i> Esportes</h2>
-                    <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: Lance</span>
+                    <span style="font-size:0.78rem;color:var(--gray-mid);">Fonte: ge</span>
                 </div>
-                <div class="news-grid news-grid-4"></div>
+                <div class="news-grid news-grid-4">
+                <article class="news-card ">
+                    <a href="https://ge.globo.com/am/futebol/times/manauara/noticia/2026/07/02/kobayashi-prega-respeito-ao-goiatuba-e-diz-nossa-vontade-tem-que-ser-maior-que-a-deles.ghtml" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://s2-ge.glbimg.com/kNvGkaN92t69I9Z_8LOCN8aZR98=/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2026/7/b/vQ0Fk6Sfm78x4rQ6UZdA/vlcsnap-2026-07-02-15h51m26s196.png" alt="Kobayashi prega respeito ao Goiatuba e diz: &quot;Nossa vontade tem que ser maior que a deles&quot;" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80'">
+                        <span class="card-category cat-sports">Esportes</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Kobayashi prega respeito ao Goiatuba e diz: &quot;Nossa vontade tem que ser maior que a deles&quot;</h3>
+                        <p class="card-summary">O Manauara segue em busca do sonhado acesso inédito na Série D do Campeonato Brasileiro. Depois de passar pelo Independência-AC, o Robô terá o Goiatuba-GO pela frente na terceira fase. O técnico Pauli...</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">g</div>
+                                <span>ge</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 31 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://ge.globo.com/al/copa-do-mundo/noticia/2026/07/02/garoto-alagoano-que-se-emocionou-com-gol-da-selecao-recebe-video-de-rayan-assista.ghtml" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://s2-ge.glbimg.com/bUSkGYEuSrNCMMYb9Cb2fYd0T10=/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2026/Q/2/NQULtmShS9AvyuE4BqaA/rayan.png" alt="Garoto alagoano que se emocionou com gol da Seleção recebe vídeo de Rayan; assista" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80'">
+                        <span class="card-category cat-sports">Esportes</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Garoto alagoano que se emocionou com gol da Seleção recebe vídeo de Rayan; assista</h3>
+                        <p class="card-summary">Atacante da Seleção, Rayan manda recado para Davi, garoto do interior de Alagoas As imagens do garoto Davi, de 12 anos, chegaram à Seleção. Segunda-feira, ele se emocionou durante o jogo contra o Japã...</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">g</div>
+                                <span>ge</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 31 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://ge.globo.com/es/futebol/times/rio-branco-es/noticia/2026/07/02/breno-melo-darlan-veja-os-jogadores-que-tem-contrato-em-vigor-com-o-rio-branco-es.ghtml" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://s2-ge.glbimg.com/dmAMKcA8JV9Y6hky4ZPepm9TEr8=/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2026/a/S/a1ZASqQSem5kKBc1qtzQ/2026-03-24-riobrancoxvilanova-15.jpg" alt="Breno Melo, Darlan... Veja os jogadores que têm contrato em vigor com o Rio Branco-ES" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80'">
+                        <span class="card-category cat-sports">Esportes</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Breno Melo, Darlan... Veja os jogadores que têm contrato em vigor com o Rio Branco-ES</h3>
+                        <p class="card-summary">Rio Branco-ES 3 x 0 Rio Branco VN | Gols | 1ª Fase | Copa Espírito Santo 2026 Com a eliminação na segunda fase do Campeonato Brasileiro Série D, o Rio Branco-ES encerrou oficialmente a temporada de 20...</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">g</div>
+                                <span>ge</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 33 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article>
+                <article class="news-card ">
+                    <a href="https://ge.globo.com/ce/futebol/times/ceara/noticia/2026/07/02/ceara-anuncia-retorno-de-lucas-mugni-para-sequencia-da-serie-b.ghtml" target="_blank" rel="noopener" class="card-link">
+                    <div class="card-image">
+                        <img src="https://s2-ge.glbimg.com/NItzwLUt5eIzpNUUsR3AwEDVYRg=/i.s3.glbimg.com/v1/AUTH_bc8228b6673f488aa253bbcb03c80ec5/internal_photos/bs/2026/i/c/9bnqWTQXmk2hfXqjK43w/whatsapp-image-2026-07-02-at-16.10.54.webp" alt="Ceará anuncia retorno de Lucas Mugni para sequência da Série B" loading="lazy"
+                             onerror="this.src='https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=600&q=80'">
+                        <span class="card-category cat-sports">Esportes</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Ceará anuncia retorno de Lucas Mugni para sequência da Série B</h3>
+                        <p class="card-summary">Argentino Lucas Mugni abraça Ceará e cultura local O Ceará anunciou nesta quinta (2) o retorno de Lucas Mugni para a sequência da temporada. O meio-campista, de 34 anos, assinou com o clube até o fina...</p>
+                        <span class="card-read-more">Ler mais <i class="fas fa-arrow-right"></i></span>
+                        <div class="card-meta">
+                            <div class="card-author">
+                                <div class="avatar">g</div>
+                                <span>ge</span>
+                            </div>
+                            <span class="card-date"><i class="far fa-clock"></i> 36 min atrás</span>
+                        </div>
+                    </div>
+                    </a>
+                </article></div>
             </div>
         </section>
 
@@ -761,10 +1028,11 @@
                 <div class="newsletter-inner">
                     <h2>Fique por dentro de tudo com a <span>Voz Brasil</span></h2>
                     <p>Receba diariamente as principais notícias do Brasil e do mundo. 100% gratuito.</p>
-                    <div class="newsletter-form">
-                        <input type="email" placeholder="Digite seu melhor e-mail...">
-                        <button><i class="fas fa-paper-plane"></i> Receber Notícias</button>
-                    </div>
+                    <form class="newsletter-form js-newsletter">
+                        <input type="email" placeholder="Digite seu melhor e-mail..." aria-label="Seu e-mail" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Receber Notícias</button>
+                    </form>
+                    <p class="form-msg" role="status" style="margin-top:14px;"></p>
                 </div>
             </div>
         </section>
@@ -775,7 +1043,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <a href="#" class="logo">
+                    <a href="/" class="logo" aria-label="Voz Brasil - Página inicial">
                         <div class="logo-icon"><i class="fas fa-newspaper"></i></div>
                         <div>
                             <div class="logo-text">Voz <span>Brasil</span></div>
@@ -784,16 +1052,16 @@
                     </a>
                     <p>O Voz Brasil traz informações precisas e cobertura completa dos acontecimentos nacionais e internacionais.</p>
                     <div class="footer-social">
-                        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
-                        <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
                     <h4>Navegação</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="#breaking">Última Hora</a></li>
                         <li><a href="#politics">Política</a></li>
                         <li><a href="#technology">Tecnologia</a></li>
@@ -806,32 +1074,30 @@
                     <ul>
                         <li><a href="https://www.cnnbrasil.com.br" target="_blank">CNN Brasil</a></li>
                         <li><a href="https://exame.com" target="_blank">Exame</a></li>
-                        <li><a href="https://www.lance.com.br" target="_blank">Lance</a></li>
-                        <li><a href="https://adrenaline.com" target="_blank">Adrenaline</a></li>
+                        <li><a href="https://ge.globo.com" target="_blank" rel="noopener">ge (Globo Esporte)</a></li>
+                        <li><a href="https://www.adrenaline.com.br" target="_blank" rel="noopener">Adrenaline</a></li>
                         <li><a href="https://revistaoeste.com" target="_blank">Revista Oeste</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
-                        <li><a href="#">Política de Privacidade</a></li>
-                        <li><a href="#">Termos de Uso</a></li>
-                        <li><a href="#">Anuncie</a></li>
-                        <li><a href="#">Contato</a></li>
+                        <li><a href="/privacidade.html">Política de Privacidade</a></li>
+                        <li><a href="/termos.html">Termos de Uso</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 <a href="#">Voz Brasil</a>. Notícias agregadas de fontes públicas.</p>
+                <p>&copy; 2026 <a href="/">Voz Brasil</a>. Notícias agregadas de fontes públicas.</p>
                 <div class="footer-bottom-links">
-                    <a href="#">Privacidade</a>
-                    <a href="#">Termos</a>
+                    <a href="/privacidade.html">Privacidade</a>
+                    <a href="/termos.html">Termos</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+    <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo"><i class="fas fa-chevron-up"></i></button>
 
     <script>
         // RELÓGIO
@@ -839,7 +1105,7 @@
             const now = new Date();
             document.getElementById('clock').textContent = now.toLocaleDateString('pt-BR', {weekday:'short',year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
         }
-        setInterval(updateClock, 1000); updateClock();
+        setInterval(updateClock, 30000); updateClock();
 
         // DARK MODE
         const toggle = document.getElementById('darkModeToggle');
@@ -885,6 +1151,47 @@
         });
         let sliderInterval = setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000);
         function resetSlider() { clearInterval(sliderInterval); sliderInterval = setInterval(() => showSlide((currentSlide + 1) % totalSlides), 6000); }
+
+        // Pausa o slider quando o mouse está sobre ele (facilita clicar na notícia)
+        const heroSliderEl = document.getElementById('heroSlider');
+        heroSliderEl.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+        heroSliderEl.addEventListener('mouseleave', resetSlider);
+
+        // BUSCA DE NOTÍCIAS (filtra os cards da página)
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('searchNoResults');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                const q = searchInput.value.trim().toLowerCase();
+                let visiveis = 0;
+                document.querySelectorAll('.news-card').forEach(card => {
+                    const combina = !q || card.textContent.toLowerCase().includes(q);
+                    card.classList.toggle('hidden-by-search', !combina);
+                    if (combina) { card.style.opacity = '1'; card.style.transform = 'translateY(0)'; visiveis++; }
+                });
+                noResults.style.display = (q && visiveis === 0) ? 'block' : 'none';
+            });
+        }
+
+        // NEWSLETTER (validação + confirmação; inscrição guardada localmente)
+        document.querySelectorAll('.js-newsletter').forEach(form => {
+            form.addEventListener('submit', ev => {
+                ev.preventDefault();
+                const input = form.querySelector('input[type="email"]');
+                const msg = form.querySelector('.form-msg') || form.parentElement.querySelector('.form-msg');
+                const email = input.value.trim();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    msg.textContent = 'Digite um e-mail válido.';
+                    msg.className = 'form-msg erro';
+                    return;
+                }
+                const lista = JSON.parse(localStorage.getItem('vb-newsletter') || '[]');
+                if (!lista.includes(email)) { lista.push(email); localStorage.setItem('vb-newsletter', JSON.stringify(lista)); }
+                msg.textContent = 'Inscrição registrada! Obrigado pelo interesse.';
+                msg.className = 'form-msg ok';
+                input.value = '';
+            });
+        });
 
         // PARALLAX HERO
         window.addEventListener('scroll', () => {
